@@ -2,9 +2,11 @@ import express, { urlencoded} from "express";
 import dotenv from 'dotenv'
 import userRoutes from './routes/userRoutes.js'
 import gptRoutes from './routes/gptRoutes.js'
+import transactionRoutes from './routes/transactionRoutes.js'
 import {notFound, errorHandler} from './middleware/errorMiddleware.js'
 import connectDB from './config/db.js'
 import cookieParser from "cookie-parser";
+
 
 dotenv.config()
 
@@ -24,6 +26,7 @@ app.use(cookieParser())
 // Routes
 app.use('/api/users', userRoutes)
 app.use('/api/ai', gptRoutes)
+app.use('/api/transactions', transactionRoutes)
 
 app.get('/', (req, res) => {
     res.send('Server started')

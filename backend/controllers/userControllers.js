@@ -22,7 +22,8 @@ const registerUser = asyncHandler(async (req, res) => {
     // Create new user with email and password
     const newUser = await User.create({
         email,
-        password
+        password,
+        purchaseTokens: 1
     })
 
     // Check if user got created properly
@@ -32,7 +33,8 @@ const registerUser = asyncHandler(async (req, res) => {
 
         res.status(201).json({
             _id: newUser._id,
-            email: newUser.email 
+            email: newUser.email,
+            purchaseTokens: newUser.purchaseTokens
         })
     }else{
         res.status(400)
@@ -59,7 +61,8 @@ const loginUser = asyncHandler(async (req, res) => {
 
         res.status(201).json({
             _id: user._id,
-            email: user.email
+            email: user.email,
+            purchaseTokens: user.purchaseTokens
         })
     }else{
         res.status(401)
@@ -125,7 +128,8 @@ const getProfile = asyncHandler(async (req, res) => {
     // Create a new object with the current user info
     const user = {
         id: req.user._id,
-        email: req.user.email
+        email: req.user.email,
+        purchaseTokens: req.user.purchaseTokens
     }
 
     // Respond with a 200, and the user
