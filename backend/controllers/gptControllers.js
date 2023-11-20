@@ -22,6 +22,7 @@ const getGptResponse = asyncHandler(async (req, res) => {
         throw new Error('Please provide a image')
     }
 
+    // Set up gpt 
     const response = await openai.chat.completions.create({
         model: 'gpt-4-vision-preview',
         max_tokens: 4096,
@@ -39,9 +40,9 @@ const getGptResponse = asyncHandler(async (req, res) => {
                 ]
             }
         ]
-
     })
 
+    // If response then send response with a 200
     if(response){
         res.status(200).json({ message: response.choices[0] })
     }else{
