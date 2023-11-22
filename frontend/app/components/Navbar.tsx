@@ -18,8 +18,8 @@ const Navbar = ({ onClick }: onClickTypes) => {
             </header>
             <div className="navBtns mt-4">
                 <Link className="text-primary mx-4" href={'/'}>Home</Link>
-                <Link className="text-primary mx-4" href={'/features'}>Features</Link>
-                <Link className="text-primary mx-4" href={'/pricing'}>Pricing</Link>
+                <Link className="text-primary mx-4" href={'/analyze'}>Analyze</Link>
+                <Link className="text-primary mx-4" href={'/tokens'}>Tokens</Link>
                 <Link href={'/register'} className="bg-primary text-white px-5 py-1 mx-2 pointer border-primary border hover:bg-white hover:text-primary transition-all duration-100">Register</Link>
                 <Link href={'/login'} className="mx-2 border border-primary px-5 py-1 pointer hover:bg-primary hover:text-white transition-all duration-100">Login</Link>
             </div>
