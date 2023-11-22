@@ -17,6 +17,9 @@ const Navbar = ({ onClick }: onClickTypes) => {
                 <Image className="" src={'/logo.png'} alt={'Pixel Perfector Logo'} width={'220'} height='50' />
             </header>
             <div className="navBtns mt-4">
+                <Link className="text-primary mx-4" href={'/'}>Home</Link>
+                <Link className="text-primary mx-4" href={'/features'}>Features</Link>
+                <Link className="text-primary mx-4" href={'/pricing'}>Pricing</Link>
                 <Link href={'/register'} className="bg-primary text-white px-5 py-1 mx-2 pointer border-primary border hover:bg-white hover:text-primary transition-all duration-100">Register</Link>
                 <Link href={'/login'} className="mx-2 border border-primary px-5 py-1 pointer hover:bg-primary hover:text-white transition-all duration-100">Login</Link>
             </div>

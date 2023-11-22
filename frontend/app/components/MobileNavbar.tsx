@@ -19,8 +19,10 @@ const MobileNavbar = ({ viewMobileNav, onClick }: MobileNavbarTypes) => {
         <div className='flex justify-center'>
             <Image className='' src={'/logo.png'} alt='Pixel Perfector Logo' width={220} height={50} />
         </div>
-        <ul className='flex w-full mt-32 items-center flex-col'>
+        <ul className='flex w-full mt-24 items-center flex-col'>
             <li className='my-3'><Link className='text-3xl text-primary' href={'/'}>Home</Link></li>
+            <li className='my-3'><Link className='text-3xl text-primary' href={'/features'}>Features</Link></li>
+            <li className='my-3'><Link className='text-3xl text-primary' href={'/pricing'}>Pricing</Link></li>
             <li className='my-3'><Link className='text-3xl text-primary' href={'/register'}>Register</Link></li>
             <li className='my-3'><Link className='text-3xl text-primary' href={'/login'}>Login</Link></li>
         </ul>
