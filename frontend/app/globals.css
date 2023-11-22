@@ -2,6 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
+
 *{
   box-sizing: border-box;
   margin: 0;
@@ -15,7 +16,13 @@
   overflow: hidden;
 }
 
+.mobileNavbar{
+  display: none;
+}
+
+
 @media(max-width: 768px){
+  /* NAVBAR */
   .navBtns{
     display: none;
   }
@@ -23,6 +30,17 @@
   .mobileNavBtn{
     display: block;
   }
+
+  /* MOBILE NAVBAR */
+
+  .mobileNavbar{
+    display: block;
+  }
+
+  .mobileNavbar.show{
+    left: 0;
+  }
+
 }
 
 /* :root {

@@ -1,15 +1,16 @@
 'use client';
 import React, {useState} from 'react'
 import Navbar from './Navbar'
-import { FaBars } from 'react-icons/fa'
+import MobileNavbar from './MobileNavbar';
 
 const Navbars = () => {
     const [viewMobileNav, setViewMobileNav] = useState<boolean>(false)
 
   return (
-    <div>
+    <>
         <Navbar onClick={() => setViewMobileNav(true)} />
-    </div>
+        <MobileNavbar viewMobileNav={viewMobileNav} onClick={() => setViewMobileNav(false)} />
+    </>
   )
 }
 
