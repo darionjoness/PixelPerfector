@@ -15,7 +15,7 @@ const registerUser = asyncHandler(async (req, res) => {
 
     // if user exists send error
     if(userExists){
-        res.status(404)
+        res.status(400)
         throw new Error('User already exists')
     }
 
@@ -23,7 +23,7 @@ const registerUser = asyncHandler(async (req, res) => {
     const newUser = await User.create({
         email,
         password,
-        purchaseTokens: 1
+        purchaseTokens: 10
     })
 
     // Check if user got created properly

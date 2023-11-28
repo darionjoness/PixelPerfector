@@ -22,6 +22,13 @@ const getGptResponse = asyncHandler(async (req, res) => {
         throw new Error('Please provide a image')
     }
 
+    // Check if the user has tokens
+    if(req.user.purchaseTokens === 0){
+        res.status(400)
+
+        throw new Error('You do not have any tokens')
+    }
+
     // Set up gpt 
     const response = await openai.chat.completions.create({
         model: 'gpt-4-vision-preview',

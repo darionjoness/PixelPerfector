@@ -1,5 +1,5 @@
 'use client';
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { MdOutlineClose } from "react-icons/md";
@@ -11,6 +11,17 @@ interface MobileNavbarTypes {
 }
 
 const MobileNavbar = ({ viewMobileNav, onClick }: MobileNavbarTypes) => {
+    // Create user state
+    const [user, setUser] = useState(null)
+
+    useEffect(() => {
+        // Get user from storage
+      const storedUser:any = localStorage.getItem('user')
+      
+    //   set user state
+      setUser(storedUser)
+    }, [])
+  
   return (
     <nav className={`mobileNavbar ${viewMobileNav ? 'show' : ''} transition-all duration-200 w-full h-full fixed top-0 left-full bg-white py-3 px-10 `}>
         <div className='text-right'>
@@ -19,13 +30,20 @@ const MobileNavbar = ({ viewMobileNav, onClick }: MobileNavbarTypes) => {
         <header className='flex justify-center'>
             <Image className='' src={'/logo.png'} alt='Pixel Perfector Logo' width={220} height={50} />
         </header>
-        <ul className='flex w-full mt-24 items-center flex-col'>
+        {!user ? <ul className='flex w-full mt-24 items-center flex-col'>
             <li className='my-3'><Link className='text-3xl text-primary' href={'/'}>Home</Link></li>
             <li className='my-3'><Link className='text-3xl text-primary' href={'/analyze'}>Analyze</Link></li>
             <li className='my-3'><Link className='text-3xl text-primary' href={'/tokens'}>Tokens</Link></li>
             <li className='my-3'><Link className='text-3xl text-primary' href={'/register'}>Register</Link></li>
             <li className='my-3'><Link className='text-3xl text-primary' href={'/login'}>Login</Link></li>
-        </ul>
+        </ul>: 
+        <ul className='flex w-full mt-24 items-center flex-col'>
+        <li className='my-3'><Link className='text-3xl text-primary' href={'/'}>Home</Link></li>
+        <li className='my-3'><Link className='text-3xl text-primary' href={'/analyze'}>Analyze</Link></li>
+        <li className='my-3'><Link className='text-3xl text-primary' href={'/tokens'}>Tokens</Link></li>
+        <li className='my-3'><Link className='text-3xl text-primary' href={'/account'}>Account</Link></li>
+    </ul>
+        }
         <Link target={'_blank'} className='absolute bottom-5 left-1/2 -translate-x-1/2	' href={'https://twitter.com/PixelPerfectors'}>
             <FaXTwitter className='text-primary text-4xl' />
         </Link>

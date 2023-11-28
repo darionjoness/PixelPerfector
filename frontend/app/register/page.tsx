@@ -1,32 +1,114 @@
 'use client';
 import React, { useState } from 'react';
 import Link from 'next/link';
+import { ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
+import {toast} from 'react-toastify'
+import { useRouter } from 'next/navigation';
+
 
 const RegisterPage = () => {
-  const [emailFocused, setEmailFocused] = useState(false);
-  const [passwordFocused, setPasswordFocused] = useState(false);
-  const [confirmPasswordFocused, setConfirmPasswordFocused] = useState(false);
+  // Focus states
+  const [emailFocused, setEmailFocused] = useState<boolean>(false);
+  const [passwordFocused, setPasswordFocused] = useState<boolean>(false);
+  const [confirmPasswordFocused, setConfirmPasswordFocused] = useState<boolean>(false);
 
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
+  // Input field states
+  const [email, setEmail] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
+  const [confirmPassword, setConfirmPassword] = useState<string>('');
+
+  // setup useRouter hook
+  const router = useRouter()
 
   const getLabelClasses = (isFocused: any, hasValue: any) => 
     `absolute left-2 transition-all duration-300 text-white ${isFocused || hasValue ? 'top-3 text-xs' : 'top-1/2 transform -translate-y-1/2'}`;
 
   const inputClass = "pt-4 pb-2 px-2 border border-gray-300 rounded w-full relative bg-transparent text-white outline-white my-2";
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  // Email test regex
+  let re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  // Password format regex
+  let regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    // Prevent default submit
     e.preventDefault()
 
-    console.log('Register')
+    // Check if email is empty
+    if(!email){
+      toast.error('Please type in a email')
+      return 
+    }
+
+    // Check if email is in a valid format
+    if(!re.test(email)){
+      toast.error('Please type in a valid email')
+      return 
+    }
+
+    if(!password){
+      toast.error('Please type in a password')
+      return
+    }
+
+    if(!regex.test(password)){
+      toast.error('Password should have one lowercase letter, one uppercase letter, one number and one special character ')
+      return
+    }
+
+    // Check if passwords match
+    if(password !== confirmPassword){
+      toast.error('Your passwords do not match!')
+      return
+    }
+
+    try {
+      // Send post request
+      const res = await fetch('api/api/users/register', {
+        method: 'POST',
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email,
+          password
+        })
+      })
+  
+      // Check if response is successful
+      if(res.ok){
+        const data = await res.json()
+
+
+        // Set local storage to new user
+        localStorage.setItem('user', JSON.stringify(data))
+
+        setEmail('')
+        setPassword('')
+        setConfirmPassword('')
+
+        // Redirect user
+        router.push('/analyze')
+
+        // check if status is 400
+      }else if(res.status === 400){
+        toast.error('User already exists with that email')
+      }
+    } catch (err:any) {
+      // Send toast error
+      toast.error(err?.data?.message || err.error)
+    }
+    
   }
 
   return (
-    <section className='px-24'>
+    <section className='registerPage px-24'>
       <div className='container'>
         <h1 className='text-secondary text-3xl text-center mt-12 mb-6'>Welcome to PixelPerfector</h1>
-        <div className='bg-primary p-5 px-16'>
+        <div className='formDiv bg-primary p-5 px-16'>
           <h1 className='text-center text-white text-xl py-3 my-3'>Create an account</h1>
           <form onSubmit={(e) => handleSubmit(e)}>
             <div className="relative mb-4">
@@ -84,6 +166,7 @@ const RegisterPage = () => {
           </form>
         </div>
       </div>
+      <ToastContainer toastStyle={{ backgroundColor: '#004D99', color: '#fff' }} />
     </section>
   );
 }

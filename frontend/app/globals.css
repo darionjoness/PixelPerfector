@@ -72,6 +72,22 @@
     justify-content: center;
   }
 
+  /* Register page */
+
+  .registerPage{
+    padding: 0;
+  }
+
+  .formDiv{
+    padding: 10px 20px;
+  }
+
+  /* LoginPage */
+
+  .loginPage{
+    padding: 0;
+  }
+
 }
 
 /* :root {

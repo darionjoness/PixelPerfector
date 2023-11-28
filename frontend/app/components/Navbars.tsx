@@ -1,16 +1,18 @@
 'use client';
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import Navbar from './Navbar'
 import MobileNavbar from './MobileNavbar';
 
 const Navbars = () => {
     const [viewMobileNav, setViewMobileNav] = useState<boolean>(false)
 
-    if(viewMobileNav){
-      document.body.style.overflow = 'hidden'
-    }else{
-      document.body.style.overflow = 'auto'
-    }
+    useEffect(() => {
+      if(viewMobileNav){
+        document.body.style.overflow = 'hidden'
+      }else{
+        document.body.style.overflow = 'auto'
+      }
+    }, [viewMobileNav])
 
   return (
     <>
