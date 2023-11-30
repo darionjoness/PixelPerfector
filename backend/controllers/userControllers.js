@@ -8,7 +8,7 @@ import generateToken from '../utils/generateToken.js'
 // @access  Public
 const registerUser = asyncHandler(async (req, res) => {  
     // Get name and password from body  
-    const { email, password } = req.body
+    const { email, password, name } = req.body
 
     // Check if user exists in db
     const userExists = await User.findOne({ email })
@@ -21,6 +21,7 @@ const registerUser = asyncHandler(async (req, res) => {
 
     // Create new user with email and password
     const newUser = await User.create({
+        name,
         email,
         password,
         purchaseTokens: 10
@@ -33,6 +34,7 @@ const registerUser = asyncHandler(async (req, res) => {
 
         res.status(201).json({
             _id: newUser._id,
+            name: newUser.name,
             email: newUser.email,
             purchaseTokens: newUser.purchaseTokens
         })

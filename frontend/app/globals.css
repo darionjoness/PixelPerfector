@@ -98,6 +98,26 @@
     padding: 0;
   }
 
+  /* AnalyzePage */
+
+  .analyzeForm{
+    width: 100%;
+  }
+
+  .analyzeForm input{
+    width: 75%;
+  }
+
+  .analyzeHeader{
+    margin-top: 50px;
+  }
+
+  .userTokens{
+    top: 10px;
+    right: 50px;
+
+  }
+
 }
 
 /* :root {

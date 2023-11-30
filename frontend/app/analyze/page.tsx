@@ -16,6 +16,7 @@ const AnalyzePage =  () => {
 
     useEffect(() => {
 
+        // Fetch user profile
         const fetchProfile = async () => {
             try {
                 const res = await fetch('/api/api/users/profile')
@@ -141,8 +142,8 @@ const AnalyzePage =  () => {
   return (
     <section>
         <div className='container'>
-            <p className='absolute right-10 text-primary top-5'>Tokens: {userTokens}</p>
-            <h1 className='text-center text-primary text-xl my-3'>Select an image of your website</h1>
+            <p className='userTokens absolute right-10 text-primary top-5'>Tokens: {userTokens}</p>
+            <h1 className='analyzeHeader text-center text-primary text-xl my-3'>Select an image of your website</h1>
             <form className='analyzeForm my-5 px-5' onSubmit={(e) => handleSubmit(e)}>
                 <Image className='my-3' src={'/logo.png'} alt={'PixelPerfector logo'} height={150} width={150} />
                 {base64 && <Image className='my-5' src={base64} alt="Image uploaded by user" width={250} height={200} />}

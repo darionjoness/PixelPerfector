@@ -9,11 +9,13 @@ import { useRouter } from 'next/navigation';
 
 const RegisterPage = () => {
   // Focus states
+  const [nameFocused, setNameFocused] = useState<boolean>(false)
   const [emailFocused, setEmailFocused] = useState<boolean>(false);
   const [passwordFocused, setPasswordFocused] = useState<boolean>(false);
   const [confirmPasswordFocused, setConfirmPasswordFocused] = useState<boolean>(false);
 
   // Input field states
+  const [name, setName] = useState<string>('')
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [confirmPassword, setConfirmPassword] = useState<string>('');
@@ -36,6 +38,11 @@ const RegisterPage = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     // Prevent default submit
     e.preventDefault()
+
+    if(!name){
+      toast.error('Please type in a name')
+      return
+    }
 
     // Check if email is empty
     if(!email){
@@ -73,6 +80,7 @@ const RegisterPage = () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
+          name,
           email,
           password
         })
@@ -107,10 +115,26 @@ const RegisterPage = () => {
   return (
     <section className='registerPage px-24'>
       <div className='container'>
-        <h1 className='text-secondary text-3xl text-center mt-12 mb-6'>Welcome to PixelPerfector</h1>
+        <h1 className='text-secondary text-3xl text-center mt-6 mb-6'>Welcome to PixelPerfector</h1>
         <div className='formDiv bg-primary p-5 px-16'>
           <h1 className='text-center text-white text-xl py-3 my-3'>Create an account</h1>
           <form onSubmit={(e) => handleSubmit(e)}>
+            <div className="relative mb-4">
+              <label 
+                htmlFor="name" 
+                className={getLabelClasses(nameFocused, name)}
+              >
+                Name
+              </label>
+              <input 
+                type="name" 
+                id="name"
+                className={inputClass}
+                onFocus={() => setNameFocused(true)}
+                onBlur={() => setNameFocused(false)}
+                onChange={(e) => setName(e.target.value)}
+              />
+            </div>
             <div className="relative mb-4">
               <label 
                 htmlFor="email" 
