@@ -37,7 +37,7 @@ const getGptResponse = asyncHandler(async (req, res) => {
             {
                 role: 'user',
                 content: [
-                    { type: 'text', text: 'Can you analyze my web design and give me feedback on anything I can improve! Can you also split the answer up into the different categories you analyzed and dont have any boilerplate for the answer, just give me the analysis.' },
+                    { type: 'text', text: 'Can you analyze my web design and give me feedback on anything I can improve! Can you also split the answer up into the different categories you analyzed and dont have any boilerplate for the answer, just give me the analysis only. Can you also put each different category on its own line?' },
                     {
                         type: 'image_url',
                         image_url: {
