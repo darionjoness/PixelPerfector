@@ -155,7 +155,7 @@ const AnalyzePage =  () => {
                 </div>}
                 <div className='px-5'>
                     {aiResponse && aiResponse.split('\n').map((line, index) => (
-                        <p className='my-3' key={index}>
+                        <p className='my-3 text-secondary' key={index}>
                         {line}
                         <br />
                         </p>

@@ -63,6 +63,7 @@ const loginUser = asyncHandler(async (req, res) => {
 
         res.status(201).json({
             _id: user._id,
+            name: user.name,
             email: user.email,
             purchaseTokens: user.purchaseTokens
         })
@@ -130,6 +131,7 @@ const getProfile = asyncHandler(async (req, res) => {
     // Create a new object with the current user info
     const user = {
         id: req.user._id,
+        name: req.user.name,
         email: req.user.email,
         purchaseTokens: req.user.purchaseTokens
     }
@@ -148,6 +150,8 @@ const updateProfile = asyncHandler(async (req, res) => {
     // Check if there is a user
     if(user){
 
+        user.name = req.body.name || user.name
+
         // If email is in body the change email, else keep the same
         user.email = req.body.email || user.email
 
@@ -163,6 +167,7 @@ const updateProfile = asyncHandler(async (req, res) => {
         // Send a 200 success with new info
         res.status(200).json({
             id: updatedUser._id,
+            name: updatedUser.name,
             email: updatedUser.email
         })
 
